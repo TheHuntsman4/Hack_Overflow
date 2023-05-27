@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from baguette.models import User
+from baguette.models import User,Business
 
 class GetSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -20,3 +20,14 @@ class RegisterSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+class GetBuisSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Business
+        fields = '__all__'
+
+class PostBuisSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Business
+        fields = ['buisid','pfp','name','domain','headquarters','websitelink','about','industry','companysize','specialities','projects']
+

@@ -17,3 +17,17 @@ class User(AbstractUser):
     description = models.CharField(max_length=10000)
     pfp = models.CharField(max_length=10000)
     REQUIRED_FIELDS = ['fullname','email','password']
+
+class Business(models.Model):
+    buisid = models.IntegerField(primary_key=True)
+    pfp = models.CharField(max_length=255,default="")
+    name = models.CharField(max_length=255)
+    motto = models.CharField(max_length=255)
+    domain = models.CharField(max_length=255)
+    headquarters = models.CharField(max_length=500)
+    websitelink = models.CharField(max_length=10000)
+    about = models.CharField(max_length=500)
+    industry = models.CharField(max_length=500)
+    companysize = models.IntegerField(null=True)
+    specialities = models.CharField(max_length=1000)
+    projects = models.JSONField()

@@ -6,5 +6,7 @@ urlpatterns = [
     path('',views.getData),
     path('register/',views.addItem),
     path('login/',views.login),
-    path('user/',views.user)
+    path('user/',views.user),
+    path('getbuisness/',views.getbuis),
+    path('postbuisness/',views.postbuis),
 ]

@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from baguette.models import User
-from.serializers import RegisterSerializer,GetSerializer
+from baguette.models import User,Business
+from.serializers import RegisterSerializer,GetSerializer,GetBuisSerializer,PostBuisSerializer
 from rest_framework.exceptions import AuthenticationFailed
 import jwt,datetime
 @api_view(['GET'])
@@ -64,3 +64,31 @@ def user(request):
     user = User.objects.get(id=payload['id'])
     serializer = RegisterSerializer(user)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getbuis(request):
+    items = Business.objects.all()
+    serializer = GetBuisSerializer(items,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def postbuis(request):
+    buisid = request.data['buisid']
+    try:
+        business = Business.objects.get(buisid=buisid)
+        serializer = PostBuisSerializer(business, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print('isvalid')
+        else:
+            print(serializer.errors)
+        return Response(serializer.data)      
+    except:
+        serializer = PostBuisSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print('Object created')
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
