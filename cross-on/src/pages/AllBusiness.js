@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from './components/Navbar.js'
-import BusinessPage from './components/BusinessPage.js'
+import Navbar from '../components/Navbar.js'
+import BusinessPage from '../components/BusinessPage.js'
 
 const AllBusiness = () => {
     const businessList = [{"id": "1","name":"bla", "username":"boobs","website":"https://youtube.com", "categories":['Space', 'IT']}, 
