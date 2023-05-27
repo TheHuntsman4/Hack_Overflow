@@ -1,5 +1,6 @@
 from initialize_firebase import db
 from community_data import ListUsers
+from google.cloud import firestore
 
 
 def CreateCommunity(document_id, uid):  # (name of community, admin user_id)
@@ -18,7 +19,7 @@ def CreateCommunity(document_id, uid):  # (name of community, admin user_id)
         print('Failed to create document.')
 
 
-def EditCommunity(document_id, uid, option=None, channel_name=None):
+def EditCommunity(document_id, uid, option=None, arg=None):
     print('---list roles---')
     userlist = ListUsers(document_id)
     if uid in userlist['admin']:
@@ -30,7 +31,7 @@ def EditCommunity(document_id, uid, option=None, channel_name=None):
         document_ref = db.collection('community').document(document_id)
         channels_subcollection = document_ref.collection('channels')
         # Create a new document within the channels subcollection
-        channel_doc_ref = channels_subcollection.document(channel_name)
+        channel_doc_ref = channels_subcollection.document(arg)
         channel_doc_ref.set({})
 
         # Create subcollection chat in channel
@@ -39,13 +40,23 @@ def EditCommunity(document_id, uid, option=None, channel_name=None):
         chat_document_ref = chat_subcollection_ref.document('messages')
         chat_document_ref.set(chat_data)
 
-    if option == 'delete':
+    elif option == 'delete':
         # Specify the document path
-        document_path = f'community/{document_id}/channels/{channel_name}'
+        document_path = f'community/{document_id}/channels/{arg}'
 
         # Delete the document
         db.document(document_path).delete()
+    elif option == 'message':
+        document_path = 'community/com1/channels/channel-1/chat/messages'
+
+        # Update append message to messages
+        db.document(document_path).update({
+            # ` is required around message-list, why? ...idk ask google
+            '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
+        })
+    else:
+        print('invalid option')
 
 
 # CreateCommunity("Lemon society", '123')
-EditCommunity('Lemon society', '123', 'delete', 'ice')
+EditCommunity('Lemon society', '123', 'message', 'Ice ice baby')

@@ -96,20 +96,19 @@ com = CommunityJson('com1')
 print(com)
 # x-------------------------------x
 
-# return the channel user roles and chat
+# return the chat
 channel = CommunityChannel('com1', 'channel-1')
 print('---chat data---')
 print(channel.messages)
 # x-------------------------------x
 
-# list all the channels in community
+# list all the channels in the community
 print('---list channels---')
 channels = ListCommunityChannels('com1')
 print(channels)
 # x-------------------------------x
-# list all the admin in community
+# list all the admin in the community
 print('---list roles---')
 userlist = ListUsers('com1')
 print(userlist)
-# x-------------------------------x
-'''
+# x-------------------------------x'''
