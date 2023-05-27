@@ -7,8 +7,9 @@ class Item(models.Model):
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=255,unique=True,default="")
     fullname = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
+    email = models.CharField(max_length=255,unique=True)
     password = models.CharField(max_length=255)
     college= models.CharField(max_length=255)
     course = models.CharField(max_length=255)
@@ -16,7 +17,8 @@ class User(AbstractUser):
     domain = models.CharField(max_length=255)
     description = models.CharField(max_length=10000)
     pfp = models.TextField()
-    REQUIRED_FIELDS = ['fullname','email','password']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email','password']
 
 class Business(models.Model):
     buisid = models.IntegerField(primary_key=True)
