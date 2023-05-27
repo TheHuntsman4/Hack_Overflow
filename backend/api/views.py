@@ -91,4 +91,16 @@ def postbuis(request):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+        
+@api_view(['POST'])
+def updatebuis(request):
+    buisid = request.data['buisid']
+    business = Business.objects.get(buisid=buisid)
+    serializer = PostBuisSerializer(business, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        print('isvalid')
+    else:
+        print(serializer.errors)
+    return Response(serializer.data)      
 
