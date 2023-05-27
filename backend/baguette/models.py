@@ -16,7 +16,6 @@ class User(AbstractUser):
     domain = models.CharField(max_length=255)
     description = models.CharField(max_length=10000)
     pfp = models.TextField()
-    username = None
     REQUIRED_FIELDS = ['fullname','email','password']
 
 class Business(models.Model):
