@@ -78,6 +78,8 @@ def ListUsers(uid):
         Data = doc.to_dict()
     return Data
 
+def QueryCommunities(query):
+    print(1)
 
 
 def CommunityJson(uid):
