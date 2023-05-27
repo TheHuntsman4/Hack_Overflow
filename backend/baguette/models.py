@@ -15,12 +15,12 @@ class User(AbstractUser):
     yearofgrad = models.CharField(max_length=255)
     domain = models.CharField(max_length=255)
     description = models.CharField(max_length=10000)
-    pfp = models.CharField(max_length=10000)
+    pfp = models.TextField()
     REQUIRED_FIELDS = ['fullname','email','password']
 
 class Business(models.Model):
     buisid = models.IntegerField(primary_key=True)
-    pfp = models.CharField(max_length=255,default="")
+    pfp = models.TextField()
     name = models.CharField(max_length=255)
     motto = models.CharField(max_length=255)
     domain = models.CharField(max_length=255)
