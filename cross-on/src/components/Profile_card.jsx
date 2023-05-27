@@ -1,6 +1,6 @@
 
 // This is a singular card element which is returned when 
-// the user searched for profiles
+// the user searches for profiles
 
 import React from 'react';
 import banner from './images/bg-pattern-card.png';
