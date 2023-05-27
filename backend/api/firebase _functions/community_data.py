@@ -89,7 +89,7 @@ def QueryCommunities(query):
     # Query the collection to find the document by name
     query = db.collection(collection_path).where('Name', '>=', query).where('Name', '<=', query + '\uf8ff')
     docs = query.get()
-    docs = query.get()
+    results = []
 
     # Iterate over the matching documents
     for doc in docs:
@@ -102,7 +102,8 @@ def QueryCommunities(query):
 
         # Print the document ID and data
         print(f"Document ID: {document_id}")
-        print(f"Data: {data}")
+        results.append(document_id)
+    return results
 
 
 def CommunityJson(uid):
@@ -136,5 +137,6 @@ print(channels)
 print('---list roles---')
 userlist = ListUsers('com1')
 print(userlist)
-# x-------------------------------x'''
+print('---Query community---')
 QueryCommunities('Lemon')
+# x-------------------------------x'''
