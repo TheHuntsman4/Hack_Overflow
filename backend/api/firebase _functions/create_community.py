@@ -27,26 +27,28 @@ def EditCommunity(document_id, uid, option=None, arg=None):
     else:
         print('unauthorized')
         exit()
-    if option == 'add':
+    if option == 'add':  # add channel
         document_ref = db.collection('community').document(document_id)
         channels_subcollection = document_ref.collection('channels')
+
         # Create a new document within the channels subcollection
         channel_doc_ref = channels_subcollection.document(arg)
         channel_doc_ref.set({})
 
-        # Create subcollection chat in channel
+        # Create chat in channel
         chat_data = {'message-list': []}
         chat_subcollection_ref = channel_doc_ref.collection('chat')
         chat_document_ref = chat_subcollection_ref.document('messages')
         chat_document_ref.set(chat_data)
 
-    elif option == 'delete':
+    elif option == 'delete':  # delete channel
         # Specify the document path
         document_path = f'community/{document_id}/channels/{arg}'
 
-        # Delete the document
+        # Delete the channel
         db.document(document_path).delete()
-    elif option == 'message':
+
+    elif option == 'message':  # send message (arg) to channel
         document_path = 'community/com1/channels/channel-1/chat/messages'
 
         # Update append message to messages
@@ -54,9 +56,10 @@ def EditCommunity(document_id, uid, option=None, arg=None):
             # ` is required around message-list, why? ...idk ask google
             '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
         })
+
     else:
         print('invalid option')
 
 
 # CreateCommunity("Lemon society", '123')
-EditCommunity('Lemon society', '123', 'message', 'Ice ice baby')
+# EditCommunity('Lemon society', '123', 'message', 'Ice ice baby')
