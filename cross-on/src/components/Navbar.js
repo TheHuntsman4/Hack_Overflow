@@ -25,9 +25,9 @@ const Navbar = ({dispNav}) => {
                         &#9776;
                     </button>
                     <nav className="hidden sm:block space-x-8 text-xl" aria-label="main">
-                        <a href="http:#rockets" className="hover:opacity-90 text-white">Profiles</a>
-                        <a href="http:#testimonials" className="hover:opacity-90 text-white">Businesses</a>
-                        <a href="http:#contact" className="hover:opacity-90 text-white">Sign in</a>
+                        <a href="/profiles" className="hover:opacity-90 text-white">Profiles</a>
+                        <a href="/business" className="hover:opacity-90 text-white">Businesses</a>
+                        <a href="/login" className="hover:opacity-90 text-white">Sign in</a>
                         <button className='text-sm h-10 text-white border border-white p-2'>Sign Up</button>
                     </nav>
                 </div>
