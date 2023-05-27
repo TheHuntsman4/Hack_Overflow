@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+body{
+    background-color: black;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}

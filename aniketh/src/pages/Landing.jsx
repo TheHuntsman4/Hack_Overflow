@@ -4,11 +4,6 @@ import { AiOutlineSearch } from 'react-icons/ai'
 
 const Landing = () => {
 
-
-
-    function Search() {
-        console.log('Search');
-    }
   return (
     <>
     <nav className='top-0 sticky z-10 bg-[#101010] opacity-90'>
@@ -47,7 +42,7 @@ const Landing = () => {
         </div>
         <div className='bg-[#101010] text-white text-[2rem] p-[2rem]'>
         Discover a dynamic community where graduates evolve into industry disruptors, pioneering new solutions and shaping the future of entrepreneurship.
-        <br />
+        <div className='my-[10rem]'>this is something</div>
         Embark on a transformative journey, where alumni entrepreneurs unleash their creativity, passion, and knowledge to make a lasting impact on the business landscape.
         </div>
     </div>
