@@ -104,3 +104,8 @@ def updatebuis(request):
         print(serializer.errors)
     return Response(serializer.data)      
 
+# ---firebase integration--- #
+from .firebase_functions import community_data
+@api_view(['GET'])
+def updatebuis(request):
+    print(community_data.CommunityJson('com1'))

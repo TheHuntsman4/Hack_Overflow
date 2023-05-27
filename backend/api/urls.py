@@ -9,5 +9,6 @@ urlpatterns = [
     path('user/',views.user),
     path('getbuisness/',views.getbuis),
     path('postbuisness/',views.postbuis),
-    path('updatebuisness/',views.updatebuis)
+    path('updatebuisness/',views.updatebuis),
+    path('communitydetails',views.community_data)
 ]
