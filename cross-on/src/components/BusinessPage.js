@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 const BusinessPage = () => {
     const projectsList = [{"name":"bla", "website":"https://youtube.com"}, {"name":"bla", "website":"https://youtube.com"}, {"name":"bla", "website":"https://youtube.com"}]
   return (
-    <html className='bg-[#101010]'>
         <body>
             <nav className='top-0 sticky z-10 bg-[#101010] opacity-90'>
                 <Navbar/>
@@ -21,7 +20,6 @@ const BusinessPage = () => {
                 </div>
             </main>
         </body>
-    </html>
   )
 }
 
