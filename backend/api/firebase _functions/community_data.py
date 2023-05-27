@@ -1,12 +1,4 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-
-# Use the application default credentials.
-cred = credentials.Certificate('croissant-311f9-firebase-adminsdk-ihvho-2f36124dda.json')
-default_app = firebase_admin.initialize_app(cred)
-db = firestore.client()
-
+from initialize_firebase import db
 class CommunityDetails:
 
     def __init__(self, uid):
@@ -28,11 +20,11 @@ class CommunityDetails:
             return name
 
         def _categories():
-            categories = Data['Description']
+            categories = Data['categories']
             return categories
 
         def _description():
-            description = "lemonade community"
+            description = Data['Description']
             return description
 
         self.id = _id()
@@ -105,8 +97,6 @@ print(com)
 
 # return the channel user roles and chat
 channel = CommunityChannel('com1', 'channel-1')
-print('---user roles---')
-print(channel.roles)
 print('---chat data---')
 print(channel.messages)
 # x-------------------------------x
@@ -117,7 +107,7 @@ channels = ListCommunityChannels('com1')
 print(channels)
 # x-------------------------------x
 # list all the admin in community
-print('---list admin---')
+print('---list roles---')
 userlist = ListUsers('com1')
 print(userlist)
 # x-------------------------------x
