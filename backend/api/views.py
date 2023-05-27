@@ -57,9 +57,10 @@ def user(request):
     if not token:
         raise AuthenticationFailed("Unauthenticated")
     try:
-        payload = jwt.decode(token,'secret',algorithm=['HS256'])
+        payload = jwt.decode(token,'bob',algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         raise AuthenticationFailed('Unauthenticated')
-    user = User.objects.filter(payload['id']).first()
+    print(payload['id'])
+    user = User.objects.get(id=payload['id'])
     serializer = RegisterSerializer(user)
     return Response(serializer.data)
