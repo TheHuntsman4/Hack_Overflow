@@ -1,4 +1,4 @@
-from initialize_firebase import db
+from .initialize_firebase import db
 class CommunityDetails:
 
     def __init__(self, uid):
@@ -82,10 +82,6 @@ def ListUsers(uid):
 def QueryCommunities(query):
     # collection path
     collection_path = 'community'
-
-    # document name to search for
-    document_name = query
-
     # Query the collection to find the document by name
     query = db.collection(collection_path).where('Name', '>=', query).where('Name', '<=', query + '\uf8ff')
     docs = query.get()
@@ -95,10 +91,6 @@ def QueryCommunities(query):
     for doc in docs:
         # Access the document ID and data
         document_id = doc.id
-        data = doc.to_dict()
-
-        # Process the document as needed
-        # ...
 
         # Print the document ID and data
         print(f"Document ID: {document_id}")

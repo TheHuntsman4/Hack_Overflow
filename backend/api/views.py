@@ -105,7 +105,56 @@ def updatebuis(request):
     return Response(serializer.data)      
 
 # ---firebase integration--- #
-from .firebase_functions import community_data
+from .firebase_functions.community_data import *
+from .firebase_functions.create_community import *
+
+
 @api_view(['GET'])
-def updatebuis(request):
-    print(community_data.CommunityJson('com1'))
+def community_data(request):
+    uid = request.data['UID']
+    print(CommunityJson(uid))
+    x = CommunityJson(uid)
+    return Response(x)
+
+@api_view(['GET'])
+def list_channels(request):
+    uid = request.data['UID']
+    channels = ListCommunityChannels(uid)
+    print(channels)
+    x = channels
+    return Response(x)
+
+@api_view(['GET'])
+def user_list(request):
+    uid = request.data['UID']
+    userlist = ListUsers(uid)
+    print(userlist)
+    x = userlist
+    return Response(x)
+
+@api_view(['GET'])
+def query_communities(request):
+    search_query = request.data['QUERY']
+    results = QueryCommunities(search_query)
+    x = results
+    print(results)
+    return Response(x)
+
+@api_view(['GET'])
+def create_community(request):
+    channel_id = request.data['UID']
+    user_uid = request.data['USER_ID']
+    description = request.data['DESCRIPTION']
+    categories = request.data['CATEGORIES']
+    x = CreateCommunity(channel_id, user_uid, description,categories)
+    print(x)
+    return Response(x)
+
+@api_view(['GET'])
+def edit_community(request):
+    channel_id = request.data['UID']
+    user_uid = request.data['USER_ID']
+    option = request.data['OPTION']  # add, delete, message
+    arg = request.data['ARG']  # arg is channel name for option -> delete and message for option -> message
+    EditCommunity(channel_id, user_uid, option, arg)
+    return Response('completed task')

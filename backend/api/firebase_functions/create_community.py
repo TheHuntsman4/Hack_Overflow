@@ -1,14 +1,15 @@
-from initialize_firebase import db
-from community_data import ListUsers
+from .initialize_firebase import db
+from .community_data import ListUsers
 from google.cloud import firestore
 
 
-def CreateCommunity(document_id, uid):  # (name of community, admin user_id)
+def CreateCommunity(document_id, user_uid, description="the lemonest of societies",
+                    categories=['lemon', ]):  # (name of community, admin user_id)
     document_ref = db.collection('community').document(document_id)
-    data = {"Description": "the lemonest of societies", "Name": document_id, "categories": ['lemon', ]}
+    data = {"Description": description, "Name": document_id, "categories": categories}
 
     member_subcollection = document_ref.collection('members')
-    member_data = {'admin': [uid, ], 'muted': []}
+    member_data = {'admin': [user_uid, ], 'muted': []}
     subdocument_ref = member_subcollection.document('members')
     subdocument_ref.set(member_data)
 
@@ -59,7 +60,6 @@ def EditCommunity(document_id, uid, option=None, arg=None):
 
     else:
         print('invalid option')
-
 
 # CreateCommunity("Lemon society", '123')
 # EditCommunity('Lemon society', '123', 'message', 'Ice ice baby')
