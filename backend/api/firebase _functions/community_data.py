@@ -71,6 +71,7 @@ def ListCommunityChannels(uid):
 
 
 def ListUsers(uid):
+    global Data
     collection_ref = db.collection('community').document(uid).collection('members')
     docs = collection_ref.get()
     for doc in docs:
@@ -89,7 +90,7 @@ def CommunityJson(uid):
     }
 
 
-# returns the community details as a json
+'''# returns the community details as a json
 print('---community details---')
 com = CommunityJson('com1')
 print(com)
@@ -111,3 +112,4 @@ print('---list roles---')
 userlist = ListUsers('com1')
 print(userlist)
 # x-------------------------------x
+'''
