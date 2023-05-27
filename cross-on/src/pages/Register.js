@@ -11,6 +11,10 @@ const Register = () => {
       username: name,
       email: username,
       password: password2,
+      domain:domain,
+      college:college,
+      course:course,
+      description:description,
     })
   };
 
@@ -18,6 +22,10 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [domain,setDomain]=useState("");
+  const [college, setCollege]=useState("");
+  const [course, setCourse]=useState("");
+  const [description,setDescription]=useState("");
   const submitRegister = async e => {
     console.log('register');
     e.preventDefault();
@@ -39,10 +47,19 @@ const Register = () => {
             <br />
             {password2 !== password ? "Passwords do not match" : ""}
           </div>
-          {/* <input type="text" placeholder="Username" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setUsername(e.target.value)}/>
-          <label>Password</label>
-          <input type="text" placeholder="Username" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setUsername(e.target.value)}/>
-          <label>Password</label> */}
+          <label>Domain</label>
+          <input type="text" placeholder="Domain" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setDomain(e.target.value)}/>
+          
+          <label>College</label>
+          <input type="text" placeholder="College" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setCollege(e.target.value)}/>
+          
+          <label>Course</label>
+          <input type="text" placeholder="Course" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setCourse(e.target.value)}/>
+          
+          <label>About You</label>
+          <input type="text" placeholder="About You" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setDescription(e.target.value)}/>
+          
+        
           <button type="submit" className='bg-blue-600 mt-5 rounded-xl w-48 h-11 p-2 flex justify-center text-white'>Register</button>
         </form>
     </div>

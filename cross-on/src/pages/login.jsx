@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate=useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,6 +21,7 @@ const Login = () => {
         // Authentication successful
         // Redirect or perform any desired action
         console.log('Login successful!');
+        navigate("/");
       } else {
         // Authentication failed
         // Display an error message or perform any desired action
