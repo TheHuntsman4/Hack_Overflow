@@ -19,4 +19,6 @@ urlpatterns = [
     path('createcommunity/', views.create_community),
     # required fields:['UID'],['USER_ID'],['OPTION'], optional: ['ARG']
     path('editcommunity/', views.edit_community),
+    path('listmessages/', views.list_messages),
+
 ]

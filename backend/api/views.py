@@ -109,22 +109,23 @@ from .firebase_functions.community_data import *
 from .firebase_functions.create_community import *
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def community_data(request):
     uid = request.data['UID']
     print(CommunityJson(uid))
     x = CommunityJson(uid)
     return Response(x)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def list_channels(request):
+    print(request.data)
     uid = request.data['UID']
     channels = ListCommunityChannels(uid)
     print(channels)
     x = channels
     return Response(x)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def user_list(request):
     uid = request.data['UID']
     userlist = ListUsers(uid)
@@ -132,7 +133,7 @@ def user_list(request):
     x = userlist
     return Response(x)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def query_communities(request):
     search_query = request.data['QUERY']
     results = QueryCommunities(search_query)
@@ -140,7 +141,7 @@ def query_communities(request):
     print(results)
     return Response(x)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def create_community(request):
     channel_id = request.data['UID']
     user_uid = request.data['USER_ID']
@@ -150,11 +151,18 @@ def create_community(request):
     print(x)
     return Response(x)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def edit_community(request):
     channel_id = request.data['UID']
     user_uid = request.data['USER_ID']
     option = request.data['OPTION']  # add, delete, message
     arg = request.data['ARG']  # arg is channel name for option -> delete and message for option -> message
     EditCommunity(channel_id, user_uid, option, arg)
+    return Response('completed task')
+
+@api_view(['POST'])
+def list_messages(request):
+    channel_id = request.data['UID']
+    arg = request.data['CHANNEL']
+    ListMessages('com1', 'channel-1')
     return Response('completed task')
