@@ -78,8 +78,31 @@ def ListUsers(uid):
         Data = doc.to_dict()
     return Data
 
+
 def QueryCommunities(query):
-    print(1)
+    # collection path
+    collection_path = 'community'
+
+    # document name to search for
+    document_name = query
+
+    # Query the collection to find the document by name
+    query = db.collection(collection_path).where('Name', '>=', query).where('Name', '<=', query + '\uf8ff')
+    docs = query.get()
+    docs = query.get()
+
+    # Iterate over the matching documents
+    for doc in docs:
+        # Access the document ID and data
+        document_id = doc.id
+        data = doc.to_dict()
+
+        # Process the document as needed
+        # ...
+
+        # Print the document ID and data
+        print(f"Document ID: {document_id}")
+        print(f"Data: {data}")
 
 
 def CommunityJson(uid):
@@ -114,3 +137,4 @@ print('---list roles---')
 userlist = ListUsers('com1')
 print(userlist)
 # x-------------------------------x'''
+QueryCommunities('Lemon')
