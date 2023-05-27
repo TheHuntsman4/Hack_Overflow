@@ -39,6 +39,10 @@ const Register = () => {
             <br />
             {password2 !== password ? "Passwords do not match" : ""}
           </div>
+          {/* <input type="text" placeholder="Username" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setUsername(e.target.value)}/>
+          <label>Password</label>
+          <input type="text" placeholder="Username" className='rounded-xl  h-11 p-5 border border-black mb-5' onChange={e => setUsername(e.target.value)}/>
+          <label>Password</label> */}
           <button type="submit" className='bg-blue-600 mt-5 rounded-xl w-48 h-11 p-2 flex justify-center text-white'>Register</button>
         </form>
     </div>

@@ -1,9 +1,14 @@
-import React from 'react'
+import {useNavigate,React}  from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 
 const Navbar = ({dispNav}) => {
     
+    const navigate = useNavigate();
+    const navigatelogin=()=>{
+        navigate('/login')
+    }
+
     function Search() {
         console.log('Search');
     }
@@ -25,10 +30,10 @@ const Navbar = ({dispNav}) => {
                         &#9776;
                     </button>
                     <nav className="hidden sm:block space-x-8 text-xl" aria-label="main">
-                        <a href="/profiles" className="hover:opacity-90 text-white">Profiles</a>
-                        <a href="/business" className="hover:opacity-90 text-white">Businesses</a>
-                        <a href="/login" className="hover:opacity-90 text-white">Sign in</a>
-                        <button className='text-sm h-10 text-white border border-white p-2'>Sign Up</button>
+                        <a href="./profiles" className="hover:opacity-90 text-white">Profiles</a>
+                        <a href="./business" className="hover:opacity-90 text-white">Businesses</a>
+                        <a onClick={navigatelogin} className="hover:opacity-90 text-white">Sign in</a>
+                        <a href="./register" className='text-sm h-10 text-white border border-white p-2'>Sign Up</a>
                     </nav>
                 </div>
             </section>
