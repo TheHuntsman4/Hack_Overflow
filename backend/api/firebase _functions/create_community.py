@@ -39,6 +39,13 @@ def EditCommunity(document_id, uid, option=None, channel_name=None):
         chat_document_ref = chat_subcollection_ref.document('messages')
         chat_document_ref.set(chat_data)
 
+    if option == 'delete':
+        # Specify the document path
+        document_path = f'community/{document_id}/channels/{channel_name}'
+
+        # Delete the document
+        db.document(document_path).delete()
+
 
 # CreateCommunity("Lemon society", '123')
-EditCommunity('Lemon society', '123', 'add', 'ice')
+EditCommunity('Lemon society', '123', 'delete', 'ice')
