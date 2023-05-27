@@ -5,8 +5,8 @@ import BusinessPage from './components/BusinessPage.js';
 
 function App() {
   return (
-   <BusinessPage/>
-  //  <AllBusiness/>
+  //  <BusinessPage/>
+   <AllBusiness/>
   );
 }
 

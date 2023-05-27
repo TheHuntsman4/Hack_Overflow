@@ -6,9 +6,10 @@ const BusinessPage = () => {
   return (
         <body>
             <nav className='top-0 sticky z-10 bg-[#101010] opacity-90'>
-                <Navbar/>
+                <Navbar dispNav={true}/>
             </nav>
             <main className='max-w-4xl mx-auto'>
+
                 <div className='my-11 w-[900px]'>
                     <BusinessCard />
                 </div>
