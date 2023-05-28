@@ -1,8 +1,26 @@
 import React from 'react'
 import Navbar from '../components/Navbar.js'
 import BusinessPage from '../components/BusinessPage.js'
+import { useEffect,useState } from 'react';
+import axios from 'axios';
 
 const AllBusiness = () => {
+
+  const[Business,setBusiness]=useState([])
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const response=await axios.get("http://django.biscuitbobby.me/getusers/")
+        console.log(response.data);
+        setBusiness(response.data);
+      }catch(error){  
+        console.error("Ooga Booga Something Went Wrong");
+      }
+    };
+    fetchData();
+  },[]);
+
+
     const businessList = [{"id": "1","name":"bla", "username":"boobs","website":"https://youtube.com", "categories":['Space', 'IT']}, 
     {"id": "2", "name":"bla", "username":"boobs", "website":"https://youtube.com", "categories":['Space', 'IT']}, 
     {"id": "3", "name":"bla", "username":"boobs", "website":"https://youtube.com", "categories":['Space', 'IT']}, 
@@ -13,7 +31,7 @@ const AllBusiness = () => {
     {"id": "8", "name":"bla", "username":"boobs", "website":"https://youtube.com", "categories":['Space', 'IT']}
   ]
   return (
-    <body>
+    <body className='max-w-4xl mx-auto'>
         <div>
         <nav className='top-0 md:sticky z-10 bg-[#101010] opacity-90'>
             <section className="w-full p-4 flex justify-between items-center">
@@ -54,10 +72,10 @@ const Businesses = ({businesses}) => {
   }
     return (
         
-          <div className=' justify-center space-x-10 grid grid-cols-4'>
+          <div className='justify-center space-x-10 grid grid-cols-4'>
               {businesses.map((business) => {
                   return (
-                  <button onClick={() => moveToBusiness(business["id"])} >
+                  <button onClick={() => moveToBusiness(business["id"])} className='ml-10'>
                     <div>
                         <BusiCard categories={business} />
                     </div>
