@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar.js'
-import BusinessPage from "../components/BusinessPage.js";
+import BusinessPage from '../components/BusinessPage.js';
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import logo from './assets/logo1.svg';
@@ -82,6 +82,7 @@ const AllBusiness = () => {
 export default AllBusiness
 
 const BusiCard = ({categories}) => {
+  console.log(categories);
   const navigate = useNavigate();
 
 const handleClick = () => {

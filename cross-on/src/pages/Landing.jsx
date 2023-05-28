@@ -39,7 +39,7 @@ const Landing = () => {
         </nav>
 
     <div class="flex h-[75vh] justify-center">
-        <div class="w-full h-full bg-[url('https://placekitten.com/1400')] bg-cover bg-center">
+        <div class="w-full h-full bg-[url('https://imageio.forbes.com/specials-images/dam/imageserve/1162334653/960x0.jpg?format=jpg&width=960')] bg-cover bg-center">
             <div class="w-full h-full flex  justify-center items-center backdrop-brightness-50">
                     <span class="text-white text-4xl w-1/2 text-center">Fueling Alumni Entrepreneurship, Igniting Success</span>
             </div>
