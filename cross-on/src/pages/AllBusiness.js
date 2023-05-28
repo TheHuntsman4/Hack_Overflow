@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar.js'
 import BusinessPage from '../components/BusinessPage.js'
 import { useEffect,useState } from 'react';
 import axios from 'axios';
+import logo from './assets/logo1.svg';
 
 const AllBusiness = () => {
 
@@ -26,12 +27,12 @@ const AllBusiness = () => {
   }
    
   return (
-    <body className='max-w-4xl mx-auto'>
+    <body>
         <div>
-        <nav className='top-0 md:sticky z-10 bg-[#101010] opacity-90'>
+        <nav className='top-0 z-10 bg-[#101010] opacity-90'>
             <section className="w-full p-4 flex justify-between items-center">
                 <h1 className="text-3xl font-medium text-white">
-                    <a href="#hero">Logo</a>
+                    <a href="/"><img src={logo} className= 'h-[5%] w-[20%]'></img></a>
                 </h1>
                 <div>
                     <button id="mobile-open-button" className="text-3xl sm:hidden focus:outline-none">
@@ -69,25 +70,6 @@ const AllBusiness = () => {
 export default AllBusiness
 
 
-// const Businesses = ({businesses}) => {
-
-//     return (
-        
-//           <div className='justify-center space-x-10 grid grid-cols-4'>
-//               {businesses.map((business) => {
-//                   return (
-//                   <button onClick={() => moveToBusiness(business["buisid"])} className='ml-10'>
-//                     <div>
-//                         <BusiCard categories={business} />
-//                     </div>
-//                   </button>
-//                   )
-//                 })
-//               }
-//           </div>
-        
-//     )
-// }
 
 const BusiCard = ({categories}) => {
     return (
