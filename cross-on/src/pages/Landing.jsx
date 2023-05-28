@@ -10,6 +10,7 @@ import android from './assets/android-svgrepo-com.svg';
 import ios from './assets/ios-svgrepo-com.svg';
 import graphic from './assets/graphic-design-book-svgrepo-com.svg';
 import flutter from './assets/flutter-svgrepo-com.svg';
+import logo from './assets/logo1.svg';
 
 const Landing = () => {
     function Search(){
@@ -17,10 +18,10 @@ const Landing = () => {
     };
   return (
     <>
-    <nav className='top-0 md:sticky z-10 bg-[#101010] opacity-90'>
+    <nav className='top-0 z-10 bg-[#101010] opacity-90'>
             <section className="w-full p-4 flex justify-between items-center">
                 <h1 className="text-3xl font-medium text-white">
-                    <a href="#hero">Logo</a>
+                    <a href="#hero"><img src={logo} className= 'h-[5%] w-[20%]'></img></a>
                 </h1>
                 <div>
                     <button id="mobile-open-button" className="text-3xl sm:hidden focus:outline-none">
