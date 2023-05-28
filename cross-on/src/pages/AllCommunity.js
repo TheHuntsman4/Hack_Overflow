@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import logo from './assets/logo1.svg';
 
 const AllCommunity = () => {
   const businessList = [{"id": "1","name":"Lemon Society","website":"https://youtube.com", "categories":['Space', 'IT']}, 
@@ -34,12 +35,13 @@ const AllCommunity = () => {
   },[]);
   
   return (
-    <body className='max-w-4xl mx-auto'>  
+    
+    <body >  
         <div>
-        <nav className='top-0 md:sticky z-10 bg-[#101010] opacity-90'>
+        <nav className='top-0 z-10 bg-[#101010] opacity-90'>
             <section className="w-full p-4 flex justify-between items-center">
                 <h1 className="text-3xl font-medium text-white">
-                    <a href="#hero">Logo</a>
+                    <a href="/"><img src={logo} className= 'h-[5%] w-[20%]'></img></a>
                 </h1>
                 <div>
                     <button id="mobile-open-button" className="text-3xl sm:hidden focus:outline-none">
@@ -74,7 +76,7 @@ const Communities = ({community}) => {
   }
     return (
         
-          <div className='justify-center space-x-10 grid grid-cols-3'>
+          <div className='justify-center   grid grid-cols-4'>
               {community.map((com) => {
                   return (
                   <button onClick={() => moveToCommunity(com["id"])} className='ml-10'>
@@ -95,7 +97,7 @@ const CommCard = ({categories}) => {
   return (
           <>
             <div className='flex py-[2rem]'>
-              <div className='w-auto h-auto bg-[#2B2727] mx-auto my-auto rounded-2xl min-h-[250px] min-w-[200px] overflow-hidden p-[11px]'>
+              <div className='w-[10rem] h-auto bg-[#2B2727] mx-auto my-auto rounded-2xl min-h-[250px] min-w-[200px] overflow-hidden p-[11px]'>
                 <div className=''>
                 </div>
                 <div className='relative'>

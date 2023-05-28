@@ -1,77 +1,122 @@
 import React from "react";
 import { AiOutlineSend } from "react-icons/ai";
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
+import logo from './assets/logo1.svg';
 
 const Community = () => {
+  const [chatList, setChatList] = useState([]);
+  useEffect(() => {
+    retrieveMessage();
+  }, []);
+  const retrieveMessage = async () => {
+    try {
+      const response = await axios.post(
+        "https://django.biscuitbobby.me/listmessages/",
+        {
+          "UID": "com1",
+          "CHANNEL": "channel-1"
+        }
+      );
+      setChatList(response.data)
+
+      // Handle the response from the server
+      console.log(response.data);
+
+      // Clear the message input
+      setMessage("");
+    } catch (error) {
+      console.error("An error occurred while sending the message:", error);
+    }
+  };
+
   
 
-  const channelsList = ["1", "2", "3", "4", "5", "6", "7", "8"];
-  const chatList = [{ time: "2:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "12:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "12:30 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "1:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "1:30 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "2:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "2:30 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
-  { time: "3:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" }, ];
+  const [message, setMessage] = useState("");
 
+  const handleSend = async () => {
+    try {
+      const response = await axios.post(
+        "https://django.biscuitbobby.me/editcommunity/",
+        {
+          UID: "com1",
+          USER_ID: "Hemanth@gmail.com",
+          OPTION: "MESSAGE",
+          ARG: message,
+        }
+      );
+
+      // Handle the response from the server
+      console.log(response.data);
+      setMessage("");
+      retrieveMessage();
+    } catch (error) {
+      console.error("An error occurred while sending the message:", error);
+    }
+  };
+
+  
+
+  
+ 
   return (
-    <div className="h-[100vh]">
+    <>
+    <nav className='top-0 z-10 bg-[#101010] opacity-90'>
+            <section className="w-full p-4 flex justify-between items-center">
+                <h1 className="text-3xl font-medium text-white">
+                    <a href="/"><img src={logo} className= 'h-[5%] w-[20%]'></img></a>
+                </h1>
+                <div>
+                    <button id="mobile-open-button" className="text-3xl sm:hidden focus:outline-none">
+                        &#9776;
+                    </button>
+                    <nav className="hidden sm:block space-x-8 text-xl" aria-label="main">
+                        <a href="/profiles" className="hover:opacity-90 text-white">Profiles</a>
+                        <a href="/communities" className="hover:opacity-90 text-white">Communities</a>
+                        <a href="/business" className="hover:opacity-90 text-white">Businesses</a>
+                        <a href="/login" className="hover:opacity-90 text-white">Sign in</a>
+                        <a href="/register" className='text-sm h-10 text-white border border-white p-2'>Sign Up</a>
+                    </nav>
+                </div>
+            </section>
+        </nav>
+    <div className="h-auto">
       <div className="flex">
-        <section className="bg-[#212121] min-w-[250px] max-w-[250px] flex flex-col border border-black ">
-          <div className="flex justify-center items-center text-white h-20">
-            Channels
-          </div>
-          <Channels channelsList={channelsList} />
-        </section>
+        
         <section className="overflow-y-auto flex-1">
           <Chats chats={chatList} />
         </section>
       </div>
-      <div className="flex justify-between mt-[80vh] bottom-0 sticky">
+      <div className="flex justify-between sticky bottom-0 ">
         <input
           placeholder="Enter message"
           type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="flex justify-end items-baseline border border-black w-full h-14 focus:outline-none p-5 text-xl"
         ></input>
-        <button className="border border-black w-20 text-white text-3xl flex justify-center items-center">
+        <button
+          onClick={handleSend}
+          className="border border-black w-20 text-white text-3xl flex justify-center items-center"
+        >
           <AiOutlineSend />
         </button>
       </div>
     </div>
+    </>
   );
 };
 
 export default Community;
 
-const Channels = ({ channelsList }) => {
-    function channelChange(channel) {
-        window.location.href = `/channel=${channel}`
-    }
-  return (
-    <>
-      {channelsList.map((channel) => (
 
-        <button onClick={() => channelChange(channel)} key={channel}>
-          <Channel channelData={channel} />
-        </button>
-      ))}
-    </>
-  );
-};
-
-const Channel = ({ channelData }) => {
-  return (
-    <div className="text-white border border-black border-collapse h-12 flex justify-center items-center">
-      {channelData}
-    </div>
-  );
-};
 
 const Chats = ({ chats }) => {
   return (
     <>
       {chats.map((chat) => (
-        <Chat chat={chat} key={chat.time} />
+        <Chat chat={chat} />
       ))}
     </>
   );
@@ -81,15 +126,8 @@ const Chat = ({ chat }) => {
   return (
     <div>
       <div className="mx-10 my-5 flex flex-col bg-black text-white p-5">
-        <div className="text-sm">
-            {chat.sender}
-        </div>
-        <div className="text-xl mt-5">
-            {chat.message}
-        </div>
-        <div className="text-end -mt-5 opacity-80">
-            {chat.time}
-        </div>
+        <div className="text-sm">{chat['uid']}</div>
+        <div className="text-xl mt-5">{chat['message']}</div>
       </div>
     </div>
   );

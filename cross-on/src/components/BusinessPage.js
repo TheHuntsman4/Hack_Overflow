@@ -5,22 +5,8 @@ import { useEffect } from 'react'
 import axios from 'axios'
 
 
-const BusinessPage = () => {
+const BusinessPage = ({Business}) => {
 
-    const[Business,setBusiness]=useState([])
-  
-    useEffect(()=>{
-        const fetchData=async()=>{
-        try{
-            const response=await axios.get("http://django.biscuitbobby.me/getbuisness/")
-            console.log(response.data);
-            setBusiness(response.data);
-        }catch(error){  
-            console.error("Ooga Booga Something Went Wrong");
-        }
-        };
-        fetchData();
-    },[]);
   return (
         <body>
             <nav className='top-0 sticky z-10 bg-[#101010] opacity-90'>
