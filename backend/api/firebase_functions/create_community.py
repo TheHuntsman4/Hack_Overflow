@@ -26,8 +26,17 @@ def EditCommunity(document_id, uid, option=None, arg=None):
     if uid in userlist['admin']:
         print(f'{uid} is authorized')
     else:
-        print('unauthorized')
-        exit()
+        if option == 'MESSAGE':  # send message (arg) to channel
+            document_path = f'community/{document_id}/channels/channel-1/chat/messages'
+
+            # Update append message to messages
+            db.document(document_path).update({
+                # ` is required around message-list, why? ...idk ask google
+                '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
+            })
+        else:
+            print('unauthorized')
+            exit()
     if option == 'ADD':  # add channel
         document_ref = db.collection('community').document('channels')
 
@@ -51,16 +60,8 @@ def EditCommunity(document_id, uid, option=None, arg=None):
 
         # Delete the channel
         db.document(document_path).delete()
-
-    elif option == 'MESSAGE':  # send message (arg) to channel
-        document_path = 'community/com1/channels/channel-1/chat/messages'
-
-        # Update append message to messages
-        db.document(document_path).update({
-            # ` is required around message-list, why? ...idk ask google
-            '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
-        })
-
+    elif option == 'MESSAGE':
+        pass
     else:
         print('invalid option')
 

@@ -164,5 +164,5 @@ def edit_community(request):
 def list_messages(request):
     channel_id = request.data['UID']
     arg = request.data['CHANNEL']
-    ListMessages('com1', 'channel-1')
-    return Response('completed task')
+    messages = ListMessages(channel_id, arg)
+    return Response(messages['message-list'])

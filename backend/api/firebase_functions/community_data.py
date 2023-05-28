@@ -120,6 +120,7 @@ def ListMessages(uid,channel):
     # Iterate over each document and print its fields
     document_data = documents.to_dict()
     print(document_data)
+    return document_data
 
 '''# returns the community details as a json
 print('---community details---')
