@@ -1,8 +1,26 @@
 import React from 'react'
 import Navbar from './Navbar'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+
 
 const BusinessPage = () => {
-    const projectsList = [{"name":"bla", "website":"https://youtube.com"}, {"name":"bla", "website":"https://youtube.com"}, {"name":"bla", "website":"https://youtube.com"}]
+
+    const[Business,setBusiness]=useState([])
+  
+    useEffect(()=>{
+        const fetchData=async()=>{
+        try{
+            const response=await axios.get("http://django.biscuitbobby.me/getbuisness/")
+            console.log(response.data);
+            setBusiness(response.data);
+        }catch(error){  
+            console.error("Ooga Booga Something Went Wrong");
+        }
+        };
+        fetchData();
+    },[]);
   return (
         <body>
             <nav className='top-0 sticky z-10 bg-[#101010] opacity-90'>
@@ -11,13 +29,13 @@ const BusinessPage = () => {
             <main className='max-w-4xl mx-auto'>
 
                 <div className='my-11 w-[900px]'>
-                    <BusinessCard />
+                    <BusinessCard Business={Business}/>
                 </div>
                 <div className='h-10'/>
                 <div className='flex'>
-                    <Overview/>
+                    <Overview Overview={Business} />
                     <div className='mx-5'/>
-                    <Projects projects={projectsList}/>
+                    <Projects projects={Business}/>
                 </div>
             </main>
         </body>
@@ -27,7 +45,7 @@ const BusinessPage = () => {
 export default BusinessPage
 
 
-const BusinessCard = () => {
+const BusinessCard = ({Business}) => {
     return (
         <section className='bg-[#212121] rounded-[20px]'>
             
@@ -38,20 +56,20 @@ const BusinessCard = () => {
             </div>
             <div className='mx-10'>
                 <div className='text-white text-4xl my-2 font-bold'>
-                    Tata Consultancy Services
+                    Business["name"]
                 </div>
                 <div className='text-white text-xl'>
-                    Building on belief
+                    Business["motto"]
                 </div>
                 <div className='text-white text-[15px] opacity-50'>
-                    IT Services and IT Consulting
+                    Business["industry"]
                 </div>
                 <div className='text-white text-[15px] opacity-50'>
-                    Mumbai, Maharashtra
+                    Business['headquarters']
                 </div>
                 <div>
                     <button className='text-black mt-5 mx-auto p-4 bg-white rounded-full'>
-                        <a target='_blank' href="https://www.tcs.com">Visit website</a>
+                        <a target='_blank' href={Business["websitelink"]}>Visit website</a>
                     </button>
                 </div>
             </div>
@@ -61,47 +79,38 @@ const BusinessCard = () => {
     )
 }
 
-const Overview = () => {
+const Overview = ({Business}) => {
     return(
         <section className='bg-[#212121] rounded-[20px] p-10 mb-20 '>
             <div className='text-white font-bold mx-10 text-xl'>
                 Overview
             </div>
             <div className='text-white mx-10 mb-10 mt-5'>
-            A purpose-led organization that is building a meaningful future through innovation, technology, and collective knowledge. We're #BuildingOnBelief.
-
-A part of the Tata group, India's largest multinational business group, TCS has over 500,000 of the world’s best-trained consultants in 46 countries. The company generated consolidated revenues of US $22.2 billion in the fiscal year ended March 31, 2021, and is listed on the BSE (formerly Bombay Stock Exchange) and the NSE (National Stock Exchange) in India. 
-
-TCS' proactive stance on climate change and award-winning work with communities across the world have earned it a place in leading sustainability indices such as the MSCI Global Sustainability Index and the FTSE4Good Emerging Index. 
-
-For more information, visit us at the link below 
-
-*Caution against fraudulent job offers*: TCS doesn't charge any fee throughout the recruitment process. Refer here: on.tcs.com/3i9X5BU
+            Business["about"]
             </div>
             <div className='text-white font-bold mx-10'>
                 Website
             </div>
             <div className='text-white mx-10'>
-                <a href="https://www.tcs.com" target="_blank">https://www.tcs.com/</a>
+                <a href={Business["websitelink"]} target="_blank">Business["websitelink"]</a>
             </div>
             <div className='text-white font-bold mx-10'>
                 Industry
             </div>
             <div className='text-white mx-10'>
-                IT Services and IT Consulting
+                Business["industry"]
             </div>
             <div className='text-white mx-10 font-bold'>
                 Company Size
             </div>
             <div className='text-white mx-10'>
-                10,000+ employees      
-                559,454 on Linkedin
+                Business["size"]
             </div>
             <div className='text-white mx-10 font-bold'>
                 Specialties
             </div>
             <div className='text-white mx-10'>
-                IT Services, Business Solutions, and Consulting
+                Business["specialties"]
             </div>
 
         </section>

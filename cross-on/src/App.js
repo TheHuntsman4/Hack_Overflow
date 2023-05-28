@@ -9,6 +9,7 @@ import Login from './pages/login.jsx';
 import Business from './pages/AllBusiness.js';
 import AllCommunity from './pages/AllCommunity.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Community from './pages/Community.js';
 function App() {
   return (
     <>    
@@ -17,8 +18,8 @@ function App() {
     <Route path='/profiles' element={<Profiles />} />
     <Route path="/business" element={<Business />} />
     <Route path="/communities" element={<AllCommunity />} />
+    <Route path="/communities/id=community" element={<Community />} />
     <Route path="/login" element={<Login />} />
-    
     <Route path='/register' element={<Register />} />
   </Routes>
   </>

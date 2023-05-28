@@ -2,6 +2,8 @@ import React from "react";
 import { AiOutlineSend } from "react-icons/ai";
 
 const Community = () => {
+  
+
   const channelsList = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const chatList = [{ time: "2:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },
   { time: "12:00 AM", sender: "sharan", message: "Hello, Let's have a nice Chat!" },

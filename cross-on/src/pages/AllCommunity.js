@@ -1,5 +1,8 @@
 import React from 'react'
 import Navbar from '../components/Navbar.js';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const AllCommunity = () => {
   const businessList = [{"id": "1","name":"Lemon Society","website":"https://youtube.com", "categories":['Space', 'IT']}, 
@@ -11,6 +14,25 @@ const AllCommunity = () => {
     {"id": "7", "name":"Plant Society", "website":"https://youtube.com", "categories":['Space', 'IT']}, 
     {"id": "8", "name":"Sky Society", "website":"https://youtube.com", "categories":['Space', 'IT']}
   ]
+
+  const[Community,setCommunity]=useState([])
+  
+  useEffect(()=>{
+      const fetchData=async()=>{
+      try{
+          const response=await axios.post("http://django.biscuitbobby.me/querycommunities/",
+          {
+            "QUERY" : "Lemon",
+          })
+          console.log(response.data);
+          setCommunity(response.data);
+      }catch(error){  
+          console.error("Ooga Booga Something Went Wrong");
+      }
+      };
+      fetchData();
+  },[]);
+  
   return (
     <body className='max-w-4xl mx-auto'>  
         <div>
@@ -48,7 +70,7 @@ export default AllCommunity
 
 const Communities = ({community}) => {
   function moveToCommunity(id) {
-    window.location.href = `/id=${id}`
+    window.location.href = `communities/id=community`
   }
     return (
         
