@@ -107,6 +107,20 @@ def CommunityJson(uid):
         'description': com.description
     }
 
+def ListMessages(uid,channel):
+    # Specify the path to the collection
+    collection_path = f"community/{uid}/channels/{channel}/chat/messages"
+
+    # Create a reference to the collection
+    collection_ref = db.document(collection_path)
+
+    # Retrieve all documents in the collection
+    documents = collection_ref.get()
+
+    # Iterate over each document and print its fields
+    document_data = documents.to_dict()
+    print(document_data)
+    return document_data
 
 '''# returns the community details as a json
 print('---community details---')
@@ -132,3 +146,4 @@ print(userlist)
 print('---Query community---')
 QueryCommunities('Lemon')
 # x-------------------------------x'''
+

@@ -26,40 +26,45 @@ def EditCommunity(document_id, uid, option=None, arg=None):
     if uid in userlist['admin']:
         print(f'{uid} is authorized')
     else:
-        print('unauthorized')
-        exit()
-    if option == 'add':  # add channel
-        document_ref = db.collection('community').document(document_id)
-        channels_subcollection = document_ref.collection('channels')
+        if option == 'MESSAGE':  # send message (arg) to channel
+            document_path = f'community/{document_id}/channels/channel-1/chat/messages'
+
+            # Update append message to messages
+            db.document(document_path).update({
+                # ` is required around message-list, why? ...idk ask google
+                '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
+            })
+        else:
+            print('unauthorized')
+            exit()
+    if option == 'ADD':  # add channel
+        document_ref = db.collection('community').document('channels')
 
         # Create a new document within the channels subcollection
-        channel_doc_ref = channels_subcollection.document(arg)
+        channel_doc_ref = document_ref.document(arg)
         channel_doc_ref.set({})
 
-        # Create chat in channel
-        chat_data = {'message-list': []}
+        # Create the chat subcollection within the channel
         chat_subcollection_ref = channel_doc_ref.collection('chat')
+        chat_subcollection_ref.set({})
+
+        # Create the messages document within the chat subcollection
         chat_document_ref = chat_subcollection_ref.document('messages')
+        chat_data = {'message-list': []}
         chat_document_ref.set(chat_data)
 
-    elif option == 'delete':  # delete channel
+
+    elif option == 'DELETE':  # delete channel
         # Specify the document path
         document_path = f'community/{document_id}/channels/{arg}'
 
         # Delete the channel
         db.document(document_path).delete()
-
-    elif option == 'message':  # send message (arg) to channel
-        document_path = 'community/com1/channels/channel-1/chat/messages'
-
-        # Update append message to messages
-        db.document(document_path).update({
-            # ` is required around message-list, why? ...idk ask google
-            '`message-list`': firestore.ArrayUnion([{'message': arg, 'uid': uid}])
-        })
-
+    elif option == 'MESSAGE':
+        pass
     else:
         print('invalid option')
 
 # CreateCommunity("Lemon society", '123')
-# EditCommunity('Lemon society', '123', 'message', 'Ice ice baby')
+def test():
+    EditCommunity('Lemon society', '123', 'add', 'Ice')
