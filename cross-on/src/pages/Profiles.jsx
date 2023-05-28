@@ -1,9 +1,25 @@
 // This is the layout for the Profile search reuslts
-
-import React from 'react'
+import {React, useEffect,useState} from 'react'
 import { Profile_Card } from '../components'
+import axios from 'axios';
 
 const Profiles = () => {
+  const[Profiles,setProfiles]=useState([])
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const response=await axios.get("http://django.biscuitbobby.me/getusers/")
+        console.log(response.data);
+        setProfiles(response.data);
+      }catch(error){  
+        console.error("Ooga Booga Something Went Wrong");
+      }
+    };
+    fetchData();
+  },[]);
+
+
+
     const domains = ['webdev', 'frontend', 'AI', 'ML', 'WEB 3'];
   return (
     <>
@@ -27,10 +43,12 @@ const Profiles = () => {
             </section>
         </nav>
       <div className='grid grid-cols-2 gap-[1.5rem] md:grid-cols-3'>
-        <Profile_Card  domains={domains}/>
-        <Profile_Card  domains={domains}/>
-        <Profile_Card  domains={domains}/>
-        <Profile_Card  domains={domains}/>
+        
+      {Profiles.map((Profile,index)=>{
+        return(
+            <Profile_Card key={index} domain={Profile["domain"]} username={Profile["username"]} email={Profile["email"]}  />
+        )
+      })}
     </div>
     </>
   )
